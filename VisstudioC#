@@ -1,0 +1,296 @@
+using System;
+
+namespace AdvantQ1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            int counter = 0;
+            string line;
+            
+            // get no. of lines in text document then declare an int array of that size
+            System.IO.StreamReader file = new System.IO.StreamReader(@"C:\Users\jayhu\source\repos\Q1Data.txt");
+            var lineCount = 0;
+            using (var reader = file)
+            {
+                while (reader.ReadLine() != null)
+                {
+                    lineCount++;
+                }
+            }
+            int[] DataQ1 = new int[lineCount];
+            //read the txt doc of data and input the data as ints into the declared array
+            System.IO.StreamReader file1 = new System.IO.StreamReader(@"C:\Users\jayhu\source\repos\Q1Data.txt");
+            while ((line = file1.ReadLine()) != null)
+            {
+                //line = file.ReadLine(counter);
+                DataQ1[counter] = Int32.Parse(line);
+                System.Console.WriteLine(DataQ1[counter]);
+                counter++;
+            }
+
+            file.Close();
+            System.Console.WriteLine("There were {0} lines.", counter);
+            // Suspend the screen.  
+            System.Console.ReadLine();
+            int[] OddData = new int[lineCount];
+            int[] EvenData = new int[lineCount];
+            counter = 0;
+            int OddCount = 0; 
+            int EvenCount = 0;
+            //sort by odd or even
+            foreach (int element in DataQ1)
+            {
+                if (DataQ1[counter] % 2 != 0)
+                {
+                    OddData[OddCount] = DataQ1[counter];
+                    Console.WriteLine(OddData[OddCount]);
+                    OddCount++;
+                    
+                }
+                else
+                { 
+                    EvenData[EvenCount] = DataQ1[counter];
+                    //Console.WriteLine(EvenData[counter]);
+                    Console.WriteLine(EvenData[EvenCount]);
+                    EvenCount++;
+                    
+                }
+                counter++;
+            }
+            
+            //sorting array
+            //int[] EntryNo = new int[lineCount];
+            counter = 0;
+            int Store1 = 0;
+            int Store2 = 0;
+            //int[] SortedOddData = new int[lineCount];
+            //int[] SortedEvenData = new int[lineCount];
+            int CounterLimmitEven = 0;
+            counter = 0;
+            do
+            {
+                CounterLimmitEven++;
+                counter++;
+            } while (EvenData[counter] != 0);
+            CounterLimmitEven--;
+            Console.WriteLine(CounterLimmitEven);
+            counter = 0;
+            do
+            {
+                if ((EvenData[counter + 1] != 0))
+                {
+                    if (EvenData[counter] > EvenData[counter + 1])
+                    {
+                        Store2 = EvenData[counter];
+                        Store1 = EvenData[counter + 1];
+                        EvenData[counter] = Store1;
+                        EvenData[counter + 1] = Store2;
+                        if (counter != 0)
+                        {
+                            //Console.WriteLine("in if");
+                            if (EvenData[counter] < EvenData[counter - 1])
+                            {
+
+                                counter--;
+                               // Console.WriteLine("taking from counter");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        counter++;
+                       // Console.WriteLine("adding to counter");
+                        //Console.WriteLine(counter);
+                        
+                    }
+                }
+                //counter++;
+            } while (counter != CounterLimmitEven);
+            counter = 0;
+            Store1 = 0;
+            Store2 = 0;
+            int CounterLimmitOdd = 0;
+            counter = 0;
+            do
+            {
+                CounterLimmitOdd++;
+                counter++;
+            } while (OddData[counter] != 0);
+            CounterLimmitOdd--;
+            Console.WriteLine(CounterLimmitOdd);
+            counter = 0;
+            do
+            {
+                if ((OddData[counter + 1] != 0) )
+                {
+                    if (OddData[counter] > OddData[counter + 1])
+                    {
+                        Store2 = OddData[counter];
+                        Store1 = OddData[counter + 1];
+                        OddData[counter] = Store1;
+                        OddData[counter + 1] = Store2;
+                        if (counter != 0)
+                        {
+                            //Console.WriteLine("in if");
+                            if (OddData[counter] < OddData[counter - 1])
+                            {
+
+                                counter--;
+                              //  Console.WriteLine("taking from counter");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        counter++;
+                        //Console.WriteLine("adding to counter");
+                        //Console.WriteLine(counter);
+                        //Console.WriteLine(CounterLimmitOdd);
+                    }
+                }
+                //counter++;
+            } while (counter != CounterLimmitOdd);
+            counter = 0;
+            Console.WriteLine("printing odd data");
+            do 
+                {
+                    Console.WriteLine(" ");
+                    Console.Write("odddata no:");
+                    Console.Write(counter);
+                    Console.Write("_");
+                    Console.Write(OddData[counter]);
+                    counter++;
+
+                } while (counter != CounterLimmitOdd);
+            counter = 0;
+            Console.ReadLine();
+            Console.WriteLine("printing Even data");
+            do
+            {
+                Console.WriteLine(" ");
+                Console.Write("Evendata no:");
+                Console.Write(counter);
+                Console.Write("_");
+                Console.Write(EvenData[counter]);
+                counter++;
+
+            } while (counter != CounterLimmitEven);
+            Console.ReadLine();
+            counter = 0;
+            int[] GreaterOddData = new int[CounterLimmitOdd];
+            int[] LesserOddData = new int[CounterLimmitOdd];
+            int GreaterCounterOdd = 0;
+            int LesserCounterOdd = 0;
+            do
+                {
+                    if ((OddData[counter] >= 1010)&(counter != CounterLimmitOdd))
+                    {
+                        GreaterOddData[GreaterCounterOdd] = OddData[counter];
+                        GreaterCounterOdd++;
+                    }
+                    else if (counter != CounterLimmitOdd)
+                    {
+                        LesserOddData[counter] = OddData[counter];
+                        LesserCounterOdd++;
+                    }
+                    counter++;
+                } while (OddData[counter] != 0);
+            int GreaterCounterOddLimmit = GreaterCounterOdd -1;
+            int lesserCounterOddLimmit = LesserCounterOdd -1;
+            counter = 0;
+            int[] GreaterEvenData = new int[CounterLimmitEven];
+            int[] LesserEvenData = new int[CounterLimmitEven];
+            int GreaterCounterEven = 0;
+            int LesserCounterEven = 0;
+            do
+            {
+                if ((EvenData[counter] >= 1010)&(counter != CounterLimmitEven))
+                {
+                    GreaterEvenData[GreaterCounterEven] = EvenData[counter];
+                    GreaterCounterEven++;
+                }
+                else if (counter != CounterLimmitEven)
+                {
+                    LesserEvenData[counter] = EvenData[counter];
+                    LesserCounterEven++;
+                }
+                counter++;
+            } while (EvenData[counter] != 0);
+            counter = 0;
+            int GreaterCounterEvenLimmit = GreaterCounterEven - 1;
+            int lesserCounterEvenLimmit = LesserCounterEven - 1;
+            GreaterCounterOdd = GreaterCounterOddLimmit;
+            LesserCounterOdd = 0;
+            int gap = 0;
+            int answerCheck = 0;
+            int answer = 0;
+            do
+            {
+                answerCheck = GreaterOddData[GreaterCounterOdd] + LesserOddData[LesserCounterOdd];
+                if (answerCheck == 2020)
+                {
+                    Console.WriteLine("in odd answer");
+                    Console.WriteLine("answer is: ");
+                    answer = GreaterOddData[GreaterCounterOdd] * LesserOddData[LesserCounterOdd];
+                    Console.Write(answer);
+                    Console.ReadLine();
+                }
+                else
+                {
+                    gap = (GreaterOddData[GreaterCounterOdd] + LesserOddData[LesserCounterOdd]) - 2020;
+                    if (gap < 0)
+                    {
+                        gap = gap * -1;
+                    }
+                    if (gap < (LesserOddData[LesserCounterOdd + 1] - LesserOddData[LesserCounterOdd]))
+                        {
+                        GreaterCounterOdd--;
+                    }
+                    else
+                    {
+                        LesserCounterOdd++;
+                    }
+                }
+            } while ((GreaterCounterOdd != 0) & (LesserCounterOdd != lesserCounterOddLimmit));
+            GreaterCounterEven = GreaterCounterEvenLimmit;
+            LesserCounterEven = 0;
+            gap = 0;
+            answerCheck = 0;
+            answer = 0;
+            do
+            {
+                answerCheck = GreaterEvenData[GreaterCounterEven] + LesserEvenData[LesserCounterEven];
+                if (answerCheck == 2020)
+                {
+                    Console.WriteLine("in even answer");
+                    Console.WriteLine("answer is: ");
+                    answer = GreaterEvenData[GreaterCounterEven] * LesserEvenData[LesserCounterEven];
+                    Console.Write(answer);
+                    Console.ReadLine();
+                }
+                else
+                {
+                    gap = (GreaterEvenData[GreaterCounterEven] + LesserEvenData[LesserCounterEven]) - 2020;
+                    if (gap < 0)
+                    {
+                        gap = gap * -1;
+                    }
+                    if (gap < (LesserEvenData[LesserCounterEven + 1] - LesserEvenData[LesserCounterEven]))
+                    {
+                        GreaterCounterEven--;
+                    }
+                    else
+                    {
+                        LesserCounterEven++;
+                    }
+                }
+            } while ((GreaterCounterEven != 0) & (LesserCounterEven != lesserCounterEvenLimmit));
+
+
+        }
+
+    }
+}
